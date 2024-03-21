@@ -49,9 +49,9 @@ To run the project locally, follow these steps:
 - JWT for authentication
 
 ### Screenshots
-- ![Screenshot 1](https://i.imgur.com/waRGQao.png)
-- ![Screenshot 2](https://i.imgur.com/ko708IP.png)
-- ![Screenshot 3](https://i.imgur.com/xhmwuhu.png)
+- <img src="https://i.imgur.com/waRGQao.png" alt="Screenshot 1" width="600">
+- <img src="https://i.imgur.com/ko708IP.png" alt="Screenshot 2" width="600">
+- <img src="https://i.imgur.com/xhmwuhu.png" alt="Screenshot 3" width="600">
 
 ### Contributing
 - To contribute to this project, please submit bug reports, feature requests, or pull requests via GitHub.
