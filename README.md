@@ -29,9 +29,13 @@ To run the project locally, follow these steps:
    ```bash
    cd PocketPenny
    npm install
-   ```
+    ```
 
-3. Start the development server:
+3. Start the Typescript files:
+   ```bash
+   npm run tsc
+   ```
+4. Start the development server:
 
    ```bash
    npm run dev
