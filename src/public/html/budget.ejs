@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/budget.css">
+    <title>PocketPenny</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="budgetContainer">
+        <div class="budgetRowsLeft">
+            <h2 class="titleEdgesLeft" >Monthly expenses</h2>
+
+            <div class="chart-container">
+                <canvas id="myChart"></canvas>
+            </div>
+            
+            <% function getFormattedDate(date) { %>
+                <% const options = { weekday: 'long',  day: '2-digit' }; %>
+                <%= date.toLocaleDateString('en-US', options) %>
+            <% } %>
+            <div class="expenses-container">
+                <% expensesByDay.forEach(day => { %>
+                <div class="day-container">
+                    <h3><%= getFormattedDate(day.date) %></h3>
+                    <div class="expenses">
+                    <% day.expenses.forEach(expense => { %>
+                        <div class="expense">
+                            <li><%= expense.description %>: <%= expense.amount %> $</li>
+                        </div>
+                    <% }) %>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+
+        <div class="budgetRows">
+            <div class="centerRowContainer">
+                <div class="tooltip">
+                    <div class="icon">i</div>
+                    <div class="tooltiptext">All results will be available on the last day of the month!</div>
+                </div>
+                <h1 class="welcomeTitle">Welcome <%= user.firstname %></h1>
+                <% if (noBillsYet) { %>
+                    <div class="startContainer">
+                        <h4 class="textStart">
+                            Start with your monthly control
+                        </h4>
+                        <form class="formStart">
+                            <input placeholder="Insert total amount" class="inputStart" type="number" min="0" required/>
+                            <button class="btnStart" type="submit">START</button>
+                        </form>
+                    </div>
+                <% } %>
+                <% if (inputAmount) { %>
+                    <div class="containerInsertAmount">
+                        <h4 class="textStartExpense"> 
+                            Insert new expense
+                        </h4>
+                        <form class="formInsertAmount">
+                            <div class="radio-inputs">
+                                <label class="radio">
+                                  <input type="radio" name="radio" value="Food&Drinks" checked="">
+                                  <span class="name">Food&Drinks</span>
+                                </label>
+                                <label class="radio">
+                                  <input type="radio" name="radio" value="Transport">
+                                  <span class="name">Transport</span>
+                                </label>
+                                    
+                                <label class="radio">
+                                  <input type="radio" name="radio" value="Supermarket">
+                                  <span class="name">Supermarket</span>
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="radio" value="Training" >
+                                    <span class="name">Training</span>
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="radio" value="Health">
+                                    <span class="name">Health</span>
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="radio" value="">
+                                    <span class="name">Leisure</span>
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="radio" value="Services">
+                                    <span class="name">Services</span>
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="radio" value="Other">
+                                    <span class="name">Other</span>
+                                </label>
+                            </div>
+                            <div class="inputAmountNew">
+                                <input placeholder="$" id="input" class="inputInsertAmount" name="text" type="number" min="0" required>   
+                            </div>
+                            <div class="container">
+                                <div class="left-side">
+                                <div class="card">
+                                    <div class="card-line"></div>
+                                    <div class="buttons"></div>
+                                </div>
+                                <div class="post">
+                                    <div class="post-line"></div>
+                                    <div class="screen">
+                                    <div class="dollar">$</div>
+                                    </div>
+                                    <div class="numbers"></div>
+                                    <div class="numbers-line2"></div>
+                                </div>
+                                </div>
+                                <div class="right-side">
+                                <div class="new">Push</div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="budgetRowsRight">
+            <% if (!noBillsYet) { %>
+                <h2 class="titleEdges">Remaining money</h2>
+                <div class="buttonMoneyRemaining">
+                    <button class="ui-btn">
+                        <span>
+                            $ <%= remainingAmount %>
+                        </span>
+                    </button>
+                    <button class="edit-button">
+                        <svg class="edit-svgIcon" viewBox="0 0 512 512">
+                            <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+                        </svg>
+                    </button>
+                    <div class="divEditOrNot">
+                        <button class="buttonX">
+                            <span class="X"></span>
+                            <span class="Y"></span>
+                        </button>
+
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox"  />
+                            <svg viewBox="0 0 35.6 35.6">
+                              <circle r="17.8" cy="17.8" cx="17.8" class="background"></circle>
+                              <circle r="14.37" cy="17.8" cx="17.8" class="stroke"></circle>
+                              <polyline
+                                points="11.78 18.12 15.55 22.23 25.17 12.87"
+                                class="check"
+                              ></polyline>
+                            </svg>
+                        </div>
+
+                          
+                    </div>
+                    <div class="loader"></div>
+                </div>
+                <button class="BtnEditTransaction">Show all transactions
+                    <svg class="svgTransaction" viewBox="0 0 512 512">
+                      <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path></svg>
+                </button>
+                <div class="card-edit">
+                    <div class="contentEditTransactionWrapper">
+                        <% user.gastos.forEach(gasto => { %>
+                            <div class="divEditTransactions">
+                                <div class="card-content">
+                                    <p class="card-heading" data-editable-type="number">$ <%= gasto.amount %></p>
+                                    <p class="card-description">Category: <%= gasto.description %></p>
+                                    <p class="card-date">Date: <%= gasto.date %></p>
+                                    <p style="display: none;" id="gastoId"> <%= gasto._id %> </p>
+                                </div>
+                                <div class="card-button-wrapper">
+                                    <button class="card-button secondary">Edit</button>
+                                    <button class="card-button primary">Delete</button>
+                                    <div class="closeEditDiv">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                        </svg>                                          
+                                    </div>
+                                    <div class="confirmEditDiv">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                        </svg> 
+                                    </div>  
+                                    <div class="checkbox-wrapperConfirm">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                        </svg>
+                                          
+                                    </div>
+                                                                            
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+
+                    
+                    <button class="exit-button">
+                      <svg height="20px" viewBox="0 0 384 512">
+                        <path
+                          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+                        ></path>
+                      </svg>
+                    </button>
+                </div>
+
+                
+                <div class="success">
+                    <div class="success__icon">
+                    <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="m12 1c-6.075 0-11 4.925-11 11s4.925 11 11 11 11-4.925 11-11-4.925-11-11-11zm4.768 9.14c.0878-.1004.1546-.21726.1966-.34383.0419-.12657.0581-.26026.0477-.39319-.0105-.13293-.0475-.26242-.1087-.38085-.0613-.11844-.1456-.22342-.2481-.30879-.1024-.08536-.2209-.14938-.3484-.18828s-.2616-.0519-.3942-.03823c-.1327.01366-.2612.05372-.3782.1178-.1169.06409-.2198.15091-.3027.25537l-4.3 5.159-2.225-2.226c-.1886-.1822-.4412-.283-.7034-.2807s-.51301.1075-.69842.2929-.29058.4362-.29285.6984c-.00228.2622.09851.5148.28067.7034l3 3c.0983.0982.2159.1748.3454.2251.1295.0502.2681.0729.4069.0665.1387-.0063.2747-.0414.3991-.1032.1244-.0617.2347-.1487.3236-.2554z" fill="#393a37" fill-rule="evenodd"></path></svg>
+                    </div>
+                    <div class="success__title">Spent modified perfectly!</div>
+                    <div class="success__close"><svg height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z" fill="#393a37"></path></svg></div>
+                </div>
+                  
+
+            <% } %>
+            <div class="main">
+                <div class="up">
+                    <a href="https://www.instagram.com/mateoivanovich/" target="_blank">
+                        <button class="card1">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="30px" height="30px" fill-rule="nonzero" class="instagram"><g fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(8,8)"><path d="M11.46875,5c-3.55078,0 -6.46875,2.91406 -6.46875,6.46875v9.0625c0,3.55078 2.91406,6.46875 6.46875,6.46875h9.0625c3.55078,0 6.46875,-2.91406 6.46875,-6.46875v-9.0625c0,-3.55078 -2.91406,-6.46875 -6.46875,-6.46875zM11.46875,7h9.0625c2.47266,0 4.46875,1.99609 4.46875,4.46875v9.0625c0,2.47266 -1.99609,4.46875 -4.46875,4.46875h-9.0625c-2.47266,0 -4.46875,-1.99609 -4.46875,-4.46875v-9.0625c0,-2.47266 1.99609,-4.46875 4.46875,-4.46875zM21.90625,9.1875c-0.50391,0 -0.90625,0.40234 -0.90625,0.90625c0,0.50391 0.40234,0.90625 0.90625,0.90625c0.50391,0 0.90625,-0.40234 0.90625,-0.90625c0,-0.50391 -0.40234,-0.90625 -0.90625,-0.90625zM16,10c-3.30078,0 -6,2.69922 -6,6c0,3.30078 2.69922,6 6,6c3.30078,0 6,-2.69922 6,-6c0,-3.30078 -2.69922,-6 -6,-6zM16,12c2.22266,0 4,1.77734 4,4c0,2.22266 -1.77734,4 -4,4c-2.22266,0 -4,-1.77734 -4,-4c0,-2.22266 1.77734,-4 4,-4z"></path></g></g></svg>
+                        </button>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mateo-ivanovich-232941227/" target="_blank">
+                        <button class="card2">
+                            <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="linkedin"
+                            height="1.6em"
+                            viewBox="0 0 448 512"
+                            >
+                            <path
+                                d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z"
+                            ></path>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
+                <div class="down">
+                    <a href="https://github.com/mateoivanovich22" target="_blank">
+                        <button class="card3">
+                            <svg
+                            class="github"
+                            height="30px"
+                            width="30px"
+                            viewBox="0 0 30 30"
+                            xmlns="http://www.w3.org/2000/svg"
+                            >
+                            <path
+                                d="M15,3C8.373,3,3,8.373,3,15c0,5.623,3.872,10.328,9.092,11.63C12.036,26.468,12,26.28,12,26.047v-2.051 c-0.487,0-1.303,0-1.508,0c-0.821,0-1.551-0.353-1.905-1.009c-0.393-0.729-0.461-1.844-1.435-2.526 c-0.289-0.227-0.069-0.486,0.264-0.451c0.615,0.174,1.125,0.596,1.605,1.222c0.478,0.627,0.703,0.769,1.596,0.769 c0.433,0,1.081-0.025,1.691-0.121c0.328-0.833,0.895-1.6,1.588-1.962c-3.996-0.411-5.903-2.399-5.903-5.098 c0-1.162,0.495-2.286,1.336-3.233C9.053,10.647,8.706,8.73,9.435,8c1.798,0,2.885,1.166,3.146,1.481C13.477,9.174,14.461,9,15.495,9 c1.036,0,2.024,0.174,2.922,0.483C18.675,9.17,19.763,8,21.565,8c0.732,0.731,0.381,2.656,0.102,3.594 c0.836,0.945,1.328,2.066,1.328,3.226c0,2.697-1.904,4.684-5.894,5.097C18.199,20.49,19,22.1,19,23.313v2.734 c0,0.104-0.023,0.179-0.035,0.268C23.641,24.676,27,20.236,27,15C27,8.373,21.627,3,15,3z"
+                            ></path>
+                            </svg>
+                        </button>
+                    </a>
+                    <a href="https://discord.com/channels/@me/mateoivanovich#8636" target="_blank">
+                        <button class="card4">
+                            <svg
+                            class="discord"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 48 48"
+                            width="30px"
+                            height="30px"
+                            >
+                            <path
+                                d="M40,12c0,0-4.585-3.588-10-4l-0.488,0.976C34.408,10.174,36.654,11.891,39,14c-4.045-2.065-8.039-4-15-4s-10.955,1.935-15,4c2.346-2.109,5.018-4.015,9.488-5.024L18,8c-5.681,0.537-10,4-10,4s-5.121,7.425-6,22c5.162,5.953,13,6,13,6l1.639-2.185C13.857,36.848,10.715,35.121,8,32c3.238,2.45,8.125,5,16,5s12.762-2.55,16-5c-2.715,3.121-5.857,4.848-8.639,5.815L33,40c0,0,7.838-0.047,13-6C45.121,19.425,40,12,40,12z M17.5,30c-1.933,0-3.5-1.791-3.5-4c0-2.209,1.567-4,3.5-4s3.5,1.791,3.5,4C21,28.209,19.433,30,17.5,30z M30.5,30c-1.933,0-3.5-1.791-3.5-4c0-2.209,1.567-4,3.5-4s3.5,1.791,3.5,4C34,28.209,32.433,30,30.5,30z"
+                            ></path>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
+            </div>
+              
+            <a href="https://github.com/mateoivanovich22/PocketPenny" target="_blank">
+                <button class="cssbuttons-io">
+                    <span
+                    ><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path
+                        d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
+                        fill="currentColor"
+                        ></path>
+                    </svg>
+                    Code</span
+                    >
+                </button>
+            </a>
+            <a class="spaceLink" href="https://api.whatsapp.com/send?phone=+5491165480369&text=Hello,%20I%20contacted%20you%20from%20your%20website,%20I%20wanted%20to%20ask%20you%3A" target="_blank">
+                <button id="btn-message" class="button-message">
+                    <div class="content-avatar">
+                        <div class="status-user"></div>
+                        <div class="avatar">
+                            <svg class="user-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,12.5c-3.04,0-5.5,1.73-5.5,3.5s2.46,3.5,5.5,3.5,5.5-1.73,5.5-3.5-2.46-3.5-5.5-3.5Zm0-.5c1.66,0,3-1.34,3-3s-1.34-3-3-3-3,1.34-3,3,1.34,3,3,3Z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="notice-content">
+                        <div class="username">Mateo Ivanovich</div>
+                        <div class="lable-message">Message<span class="number-message">📱</span></div>
+                        <div class="user-id">whatsapp</div>
+                    </div>
+                </button>
+            </a>
+              
+        </div>
+    </div>
+    <% const expensesByCategoryJSON = expensesByCategory; %>
+    <% const categoriesJSON = categories; %>
+
+    <script id="expensesByCategory" data-expenses="<%- expensesByCategoryJSON %>"></script>
+    <script id="categories" data-categories="<%- categoriesJSON %>"></script>
+
+    <script src="./public/ts/budget.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+        const scriptElement1 = document.getElementById('expensesByCategory')
+        const scriptElement2 = document.getElementById('categories');
+        const expensesByCategory = scriptElement1.getAttribute('data-expenses')
+        const categories = scriptElement2.getAttribute('data-categories')
+
+        const arrayPorcentajes = expensesByCategory.split(',')
+        const arrayCategories = categories.split(',')
+
+        new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: arrayCategories,
+            datasets: [{
+              label: 'Expenses percentage',
+              data: arrayPorcentajes,
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+    </script>
+
+</body>
+</html>

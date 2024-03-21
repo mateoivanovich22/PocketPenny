@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=AR+One+Sans&family=Kanit:wght@300&display=swap');
+
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+
+
+
+.registerContainer{
+    width: 100%;
+    height: 100vh;
+    background-color: #c7c7c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formRegister {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 350px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+}
+  
+.titleRegister {
+    font-size: 28px;
+    color: royalblue;
+    font-weight: 600;
+    letter-spacing: -1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+}
+  
+.titleRegister::before, .titleRegister::after {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    left: 0px;
+    background-color: royalblue;
+}
+  
+.titleRegister::before {
+    width: 18px;
+    height: 18px;
+    background-color: royalblue;
+}
+  
+.titleRegister::after {
+    width: 18px;
+    height: 18px;
+    animation: pulse 1s linear infinite;
+}
+  
+.messageRegister, .signinRegister {
+    color: rgba(88, 87, 87, 0.822);
+    font-size: 14px;
+}
+  
+.signinRegister {
+    text-align: center;
+}
+  
+.signinRegister a {
+    color: royalblue;
+}
+  
+.signinRegister a:hover {
+    text-decoration: underline royalblue;
+}
+  
+.flexRegister {
+    display: flex;
+    width: 97%;
+    gap: 28px;
+}
+
+.formRegister label {
+    position: relative;
+}
+  
+.formRegister label .inputRegister {
+    width: 95%;
+    padding: 10px 10px 20px 10px;
+    outline: 0;
+    border: 1px solid rgba(105, 105, 105, 0.397);
+    border-radius: 10px;
+}
+  
+.formRegister label .inputRegister + span {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    color: grey;
+    font-size: 0.9em;
+    cursor: text;
+    transition: 0.3s ease;
+}
+  
+.formRegister label .inputRegister:placeholder-shown + span {
+    top: 15px;
+    font-size: 0.9em;
+}
+  
+.formRegister label .inputRegister:focus + span, .formRegister label .inputRegister:valid + span {
+    top: 30px;
+    font-size: 0.7em;
+    font-weight: 600;
+}
+  
+.formRegister label .inputRegister:valid + span {
+    color: green;
+}
+  
+.submitRegister {
+    border: none;
+    outline: none;
+    background-color: royalblue;
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    transform: .3s ease;
+}
+  
+.submitRegister:hover {
+    background-color: rgb(56, 90, 194);
+}
+
+@keyframes pulse {
+    from {
+      transform: scale(0.9);
+      opacity: 1;
+    }
+  
+    to {
+      transform: scale(1.8);
+      opacity: 0;
+    }
+}
+
+
+@media (max-width: 403px) {
+    .formRegister {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 290px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 20px;
+        position: relative;
+    }
+}
+
+
+@media (max-width: 350px) {
+    .formRegister {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 266px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 20px;
+        position: relative;
+    }
+
+    .titleRegister {
+        font-size: 26px;
+        color: royalblue;
+        font-weight: 550;
+        letter-spacing: -1px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding-left: 33px;
+    }
+
+    .formRegister label .inputRegister {
+        width: 89%;
+        padding: 10px 10px 20px 10px;
+        outline: 0;
+        border: 1px solid rgba(105, 105, 105, 0.397);
+        border-radius: 10px;
+    }
+
+    .flexRegister {
+        display: flex;
+        width: 93%;
+        gap: 28px;
+    }
+
+    .messageRegister, .signinRegister {
+        color: rgba(88, 87, 87, 0.822);
+        font-size: 15px;
+    }
+    
+    
+}
