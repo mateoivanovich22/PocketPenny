@@ -6,6 +6,7 @@ import homeRouter from './routes/home'
 
 import path from 'path';
 
+
 import passport from "passport";
 import initializePassport from "./config/passport.config";
 
@@ -17,11 +18,13 @@ const app = express()
 
 app.use(cookieParser())
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.set('view engine', 'ejs');
 
 app.set('views', path.join(__dirname, 'public', 'html'));
 
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
