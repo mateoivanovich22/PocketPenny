@@ -1,4 +1,5 @@
 # PocketPenny
+- ![Screenshot 1](https://i.imgur.com/J85WXCD.png)
 
 PocketPenny is a TypeScript-based web application designed to help you manage your monthly expenses effectively. With PocketPenny, you can add, delete, edit expenses, and more. The platform provides intuitive charts and a list view to keep track of your spending.
 
@@ -28,9 +29,13 @@ To run the project locally, follow these steps:
    ```bash
    cd PocketPenny
    npm install
-   ```
+    ```
 
-3. Start the development server:
+3. Start the Typescript files:
+   ```bash
+   npm run tsc
+   ```
+4. Start the development server:
 
    ```bash
    npm run dev
@@ -48,9 +53,9 @@ To run the project locally, follow these steps:
 - JWT for authentication
 
 ### Screenshots
-- ![Screenshot 1](screenshot1.png)
-- ![Screenshot 2](screenshot2.png)
-- ![Screenshot 3](screenshot3.png)
+- <img src="https://i.imgur.com/waRGQao.png" alt="Screenshot 1" width="600">
+- <img src="https://i.imgur.com/ko708IP.png" alt="Screenshot 2" width="600">
+- <img src="https://i.imgur.com/xhmwuhu.png" alt="Screenshot 3" width="600">
 
 ### Contributing
 - To contribute to this project, please submit bug reports, feature requests, or pull requests via GitHub.
