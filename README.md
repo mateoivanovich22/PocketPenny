@@ -33,7 +33,7 @@ To run the project locally, follow these steps:
 
 3. Start the Typescript files:
    ```bash
-   npm run tsc
+   npm run build
    ```
 4. Start the development server:
 
